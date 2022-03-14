@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restore Images with AI</title>
+</head>
+
+<body>
+    <h1 class="title_bar">Restore Images with AI</h1>
+
+    <div class="container">
+        <img src="static/index/enhance.jpg" alt="Avatar" class="image" style="width:100%">
+        <div class="middle">
+            <button id="enhance" name="enhance" value="enhance" type="submit" class="enhance_button"
+                onclick="window.location.href='{{url_for('enhance')}}';">Enhance Image</button>
+        </div>
+        <h2 style="text-align: center; font-family: Consolas;">Enhnace Image</h2>
+    </div>
+
+
+    <div class="container" style="margin-left: 52%; margin-top: 10%;">
+        <img src="static/index/color.jpg" alt="Avatar" class="image" style="width:100%;">
+        <div class="middle">
+            <button id="color" name="color" value="color" type="submit" class="color_button"
+                onclick="window.location.href='{{url_for('color')}}';">Colorize Image</button>
+        </div>
+        <h2 style="text-align: center; font-family: Consolas;">Colorize Image</h2>
+    </div>
+
+</body>
+
+<style>
+    .title_bar {
+        background-color: antiquewhite;
+        padding: 1%;
+        text-align: center;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+        position: fixed;
+        width: 30%;
+        height: 30%;
+        /* background-color: chocolate; */
+        margin-top: 10%;
+        margin-left: 15%;
+    }
+
+    .image {
+        opacity: 1;
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: .5s ease;
+        backface-visibility: hidden;
+    }
+
+    .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -2%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .container:hover .image {
+        opacity: 0.3;
+    }
+
+    .container:hover .middle {
+        opacity: 1;
+    }
+
+    .enhance_button {
+        /* background-color: #04AA6D; */
+        font-family: Garamond;
+        color: black;
+        font-size: 30px;
+        padding: 16px 32px;
+        margin-top: 35%;
+    }
+
+    .color_button {
+        /* background-color: #04AA6D; */
+        font-family: Garamond;
+        color: black;
+        font-size: 30px;
+        padding: 16px 32px;
+        margin-top: 35%;
+    }
+</style>
+
+</html>

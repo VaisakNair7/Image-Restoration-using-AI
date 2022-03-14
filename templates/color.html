@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Restore Images with AI</title>
+
+    <script>
+        $(document).ready(function () {
+            $('form input').change(function () {
+                $('form p').text(this.files.length + " file selected");
+            });
+        });
+
+    </script>
+
+</head>
+
+<body>
+
+    <h1 class="title_bar">Restore Images with AI - Colorize Image</h1>
+    <button type="submit" class="btn" name="home" value="home" id="home"
+        onclick="window.location.href='{{url_for('home')}}';">
+        <i class="fa fa-home"></i></button>
+
+    <form action="{{url_for('color')}}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file" value="Scan" class="Scan" accept="image/png, image/jpeg, image/jpg" />
+        <p class="upload">Drag your file here or click to upload</p>
+        <button style="width:100%" type="submit" name="upload_color" value="upload_color" id="upload_color"
+            class="button-5">Upload Image</button>
+
+        <div class="options">
+            <p>Select the type of style you want to apply :</p>
+            {{options|safe}}<br><br><br>
+
+            <div class="btn-group">
+                <button id="color_image" name="color_image" value="color_image">Colorize</button>
+                <button><a href={{result_image|safe}} download="image.jpg">Download Image</a></button>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="row">
+        <div class="column">
+            <img src={{upload_image|safe}} alt="Upload" height="500" width="500" class="zoom"
+                style="max-width: 100%; max-width: 100%; border-radius: 2%;">
+        </div>
+        <div class="column">
+            <img src={{result_image|safe}} alt="Result" height="500" width="500" class="zoom"
+                style="max-width: 100%; max-width: 100%; border-radius: 2%;">
+        </div>
+    </div>
+
+
+    <p class="upload_text">{{upload_text|safe}}</p>
+    <div class="result_text">
+        <p>{{result_text|safe}}</p>
+    </div>
+
+</body>
+
+<style>
+    .btn {
+        background-color: DodgerBlue;
+        border: none;
+        color: white;
+        padding: 12px 16px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: RoyalBlue;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .column {
+        /* background-color: #c85000; */
+        float: left;
+        width: 50%;
+        max-height: 40%;
+        padding: 5px;
+        text-align: center;
+        margin-top: 13.5%;
+    }
+
+    .row::after {
+        content: "";
+        height: 40%;
+        clear: both;
+        display: table;
+    }
+
+    .title_bar {
+        background-color: antiquewhite;
+        margin-top: -0.7%;
+        padding: 1%;
+        text-align: center;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    form {
+        position: absolute;
+        top: 23%;
+        /* background-color: blueviolet; */
+        left: 25%;
+        margin-top: -6%;
+        width: 400px;
+        height: 180px;
+        border: 4px dashed #00aeff;
+    }
+
+    .upload {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        line-height: 150px;
+        color: #00aeff;
+        font-family: Arial;
+    }
+
+    .options {
+        width: 100%;
+        height: 30%;
+        margin-top: -70%;
+        margin-left: 140%;
+        font-size: larger;
+        font-family: 'Segoe UI';
+    }
+
+    input[type="checkbox"] {
+        width: 15px;
+        height: 15px;
+    }
+
+    input[type="range"] {
+        width: 250px;
+    }
+
+    .Scan {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        opacity: 0;
+    }
+
+    .upload_text {
+        /* background-color: chocolate; */
+        height: 10%;
+        width: 50%;
+        text-align: center;
+        font-size: x-large;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .result_text {
+        /* background-color: chocolate; */
+        height: 100%;
+        width: 50%;
+        text-align: center;
+        font-size: x-large;
+        font-family: 'Times New Roman', Times, serif;
+        margin-left: 50%;
+        margin-top: -2.5%;
+    }
+
+    .zoom {
+        transition: transform .2s;
+        /* Animation */
+        margin: 0 auto;
+    }
+
+    .zoom:hover {
+        transform: scale(1.16);
+    }
+
+    a:link {
+        text-decoration: none;
+        color: white;
+    }
+
+    a:visited {
+        text-decoration: none;
+        color: white;
+    }
+
+    .btn-group button {
+        background-color: #04AA6D;
+        border: 1px solid green;
+        color: white;
+        padding: 10px 24px;
+        cursor: pointer;
+        float: left;
+        height: 10%;
+        width: 47%;
+        font-size: medium;
+        margin: 5px;
+        margin-top: -5%;
+    }
+
+    .btn-group button:not(:last-child) {
+        border-right: none;
+    }
+
+    .btn-group:after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .btn-group button:hover {
+        background-color: #3e8e41;
+    }
+
+    .button-5 {
+        align-items: center;
+        background-clip: padding-box;
+        background-color: #fa6400;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        display: inline-flex;
+        font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        justify-content: center;
+        line-height: 1.25;
+        margin: 0;
+        min-height: 3rem;
+        padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+        position: relative;
+        text-decoration: none;
+        transition: all 250ms;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: baseline;
+        width: auto;
+    }
+
+    .button-5:hover,
+    .button-5:focus {
+        background-color: #fb8332;
+        box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    }
+
+    .button-5:hover {
+        transform: translateY(-1px);
+    }
+
+    .button-5:active {
+        background-color: #c85000;
+        box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+        transform: translateY(0);
+    }
+</style>
+
+</html>
